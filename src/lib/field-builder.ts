@@ -85,8 +85,10 @@ export class FieldBuilder<T = any> {
     return this as FieldBuilder<mongoose.Types.Decimal128>
   }
 
-  build(): Field {
-    return this.field
+  required() {
+    this.field.assign(fields.required)
+
+    return this
   }
 
   static init(name: string, schema: Schema) {

@@ -9,3 +9,5 @@ export type FieldAttribute = {
   min?: number
   max?: number
 }
+
+export type Definitions = Record<string, SchemaDefinitionType<any>>

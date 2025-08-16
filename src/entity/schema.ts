@@ -1,28 +1,27 @@
-import { Field } from './field'
-import type { SchemaDefinition } from 'mongoose'
+import type { Definitions } from '../types'
+import type { SchemaDefinitionType } from 'mongoose'
 
 export class Schema {
-  private readonly fields: Field[] = []
+  private readonly definitions: Definitions = {}
 
-  addField(field: Field): this {
-    this.fields.push(field)
-
-    return this
+  setDefinition(name: string, definition: SchemaDefinitionType<any>) {
+    this.definitions[name] = {
+      ...this.definitions[name],
+      ...definition,
+    }
   }
 
-  getFields(): Field[] {
-    return this.fields
+  getDefinitions(): Definitions {
+    return this.definitions
   }
 
-  resolveFields() {
-    return this.getFields().reduce<SchemaDefinition>(
-      (schema, field) => ({
-        ...schema,
-        [field.getName()]: {
-          required: true,
-        },
-      }),
-      {},
-    )
+  resolveDefinitions() {
+    const definitions: Definitions = {}
+
+    for (const definition in this.definitions) {
+      definitions[definition] = this.definitions[definition]
+    }
+
+    return definitions
   }
 }

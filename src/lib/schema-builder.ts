@@ -14,8 +14,7 @@ export class SchemaBuilder {
   }
 
   build(): mongoose.Schema {
-    console.log(this.schema.resolveFields())
-    return new mongoose.Schema(this.schema.resolveFields())
+    return new mongoose.Schema(this.schema.resolveDefinitions())
   }
 
   static init() {

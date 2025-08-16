@@ -21,6 +21,7 @@ export class Field {
 
   assign(attribute: FieldAttribute): this {
     Object.assign(this, attribute)
+    this.schema.setDefinition(this.name, attribute)
     return this
   }
 
