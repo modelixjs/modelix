@@ -1,12 +1,16 @@
-import { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 import { FieldBuilder } from './field-builder'
 
 export class SchemaBuilder {
-  private readonly fields: FieldBuilder[] = []
+  addField(name: string) {
+    return new FieldBuilder(name)
+  }
 
-  constructor() {}
+  build(): mongoose.Schema {
+    return new mongoose.Schema({})
+  }
 
-  build() {
-    return new Schema({})
+  static init() {
+    return new SchemaBuilder()
   }
 }

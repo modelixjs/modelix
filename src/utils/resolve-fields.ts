@@ -1,7 +1,13 @@
-import { forOf } from './for-of'
-import { FieldBuilder } from '../lib'
+import { Field } from '../entity'
+import type { SchemaDefinition } from 'mongoose'
 
-const resolveField = (field: FieldBuilder) => field.build()
-
-export const resolveFields = (fields: FieldBuilder[]) =>
-  forOf(fields, resolveField)
+export const resolveSchemaFields = (fields: Field[]): SchemaDefinition =>
+  fields.reduce<SchemaDefinition>(
+    (schema, field) => ({
+      ...schema,
+      [field.getName()]: {
+        required: true,
+      },
+    }),
+    {},
+  )

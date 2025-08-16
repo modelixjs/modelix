@@ -1,3 +1,3 @@
-export { FieldBuilder } from './field-builder'
-export { ModelBuilder } from './model-builder'
-export { SchemaBuilder } from './schema-builder'
+export * from './field-builder'
+export * from './model-builder'
+export * from './schema-builder'

@@ -1,30 +1,44 @@
-import type { SchemaDefinition, SchemaDefinitionProperty } from 'mongoose'
+import type { SchemaDefinitionType } from 'mongoose'
+import type { FieldAttribute } from '../types'
 
 export class Field {
-  private max?: number
-  private min?: number
-  private required?: boolean = false
+  private readonly name: string
+  private readonly max?: number
+  private readonly min?: number
+  private required?: boolean
+  private type?: SchemaDefinitionType<any>
 
-  constructor(private readonly name: string) {}
+  constructor(name: string) {
+    this.name = name
+  }
 
-  assign(value: Partial<Field>): this {
-    Object.assign(this, value)
+  assign(attribute: FieldAttribute): this {
+    Object.assign(this, attribute)
 
     return this
   }
 
-  isConfigured() {
-    return true
+  getName(): string {
+    return this.name
   }
 
-  // resolve(): SchemaDefinition {
-  //   const properties: SchemaDefinitionProperty<T> = {
-  //     min: this.min,
-  //     max: this.max,
-  //   }
-  //
-  //   return {
-  //     [this.name]: properties,
-  //   }
-  // }
+  getMax(): number | undefined {
+    return this.max
+  }
+
+  getMin(): number | undefined {
+    return this.min
+  }
+
+  getRequired(): boolean | undefined {
+    return this.required
+  }
+
+  getType(): SchemaDefinitionType<any> {
+    return this.type
+  }
+
+  isConfigured() {
+    return Boolean(this.type)
+  }
 }
