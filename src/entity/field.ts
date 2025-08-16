@@ -2,10 +2,19 @@ import type { SchemaDefinitionType } from 'mongoose'
 import type { FieldAttribute } from '../types'
 
 export class Field {
+  /** The name of the field */
   private readonly name: string
+
+  /** The maximum value allowed for the field  */
   private readonly max?: number
+
+  /** The minimum value allowed for the field */
   private readonly min?: number
+
+  /** Whether the field is required */
   private required?: boolean
+
+  /** The Mongoose schema type for the field */
   private type?: SchemaDefinitionType<any>
 
   /**
