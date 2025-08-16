@@ -1,0 +1,21 @@
+{
+  "name": "mongo-builder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "mongoose": "^8.17.1"
+  }
+}
