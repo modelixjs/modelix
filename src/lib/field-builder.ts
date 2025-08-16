@@ -13,7 +13,7 @@ export class FieldBuilder<T = any> {
     this.field = new Field(this.name, this.schema)
   }
 
-  string(): FieldBuilder<string> {
+  string() {
     invariant(!this.field.isConfigured(), ERROR_FIELD_ALREADY_CONFIGURED)
 
     this.field.assign(fields.string)
@@ -87,5 +87,9 @@ export class FieldBuilder<T = any> {
 
   build(): Field {
     return this.field
+  }
+
+  static init(name: string, schema: Schema) {
+    return new FieldBuilder(name, schema)
   }
 }

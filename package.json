@@ -1,9 +1,9 @@
 {
-  "name": "mongo-builder",
+  "name": "modelix",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\""
+    "dev": "tsup src/index.ts --format esm --watch --onSuccess \"node dist/index.js\""
   },
   "keywords": [],
   "author": "",
