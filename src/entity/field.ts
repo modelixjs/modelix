@@ -1,8 +1,8 @@
 import type { SchemaDefinitionType, SchemaTypes } from 'mongoose'
+import { Schema } from './schema'
 import type { FieldAttribute } from '../types'
 
 export class Field {
-  private readonly name: string
   private readonly max?: number
   private readonly min?: number
   private required?: boolean
@@ -14,9 +14,10 @@ export class Field {
   private immutable?: boolean
   private select?: boolean
 
-  constructor(name: string) {
-    this.name = name
-  }
+  constructor(
+    private readonly name: string,
+    private readonly schema: Schema,
+  ) {}
 
   assign(attribute: FieldAttribute): this {
     Object.assign(this, attribute)

@@ -1,14 +1,16 @@
 import mongoose from 'mongoose'
-import { Field } from '../entity'
-import { fields } from '../constants'
+import { fields, ERROR_FIELD_ALREADY_CONFIGURED } from '../constants'
+import { Field, Schema } from '../entity'
 import { invariant } from '../utils'
-import { ERROR_FIELD_ALREADY_CONFIGURED } from '../constants'
 
 export class FieldBuilder<T = any> {
   private readonly field: Field
 
-  constructor(private readonly name: string) {
-    this.field = new Field(this.name)
+  constructor(
+    private readonly name: string,
+    private readonly schema: Schema,
+  ) {
+    this.field = new Field(this.name, this.schema)
   }
 
   string(): FieldBuilder<string> {

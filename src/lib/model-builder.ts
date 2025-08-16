@@ -9,7 +9,7 @@ export class ModelBuilder {
     private readonly name: string,
     configure: Configure,
   ) {
-    this.schemaBuilder = new SchemaBuilder()
+    this.schemaBuilder = SchemaBuilder.init()
     configure(this.schemaBuilder)
   }
 
