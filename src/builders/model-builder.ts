@@ -13,8 +13,8 @@ import type { Setup } from '../types'
  */
 export class ModelBuilder<T extends object> {
   /** Event emitter instance for handling model events */
-
   emitter: EventEmitter
+
   /** The schema instance associated with this model builder */
   protected schema: Schema<T>
 

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
+import { TYPE_ALREADY_CONFIGURED } from '../constants'
 import { Def } from '../entity'
 import { invariant } from '../utils'
-import { TYPE_ALREADY_CONFIGURED } from '../constants'
 
 /**
  * A builder class for defining Mongoose schema fields with fluent API.
