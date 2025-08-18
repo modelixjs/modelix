@@ -25,11 +25,14 @@ export class ModelBuilder<T> {
 
   build(): Model<T> {
     if (mongoose.models[this.name]) {
-      return new Model<T>(mongoose.model<T>(this.name))
+      return new Model<T>(mongoose.model<T & mongoose.Document>(this.name))
     }
 
     return new Model<T>(
-      mongoose.model<T>(this.name, this.schema.toSchemaDefinition()),
+      mongoose.model<T & mongoose.Document>(
+        this.name,
+        new mongoose.Schema<T>(this.schema.toSchemaDefinition()),
+      ),
     )
   }
 }

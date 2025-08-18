@@ -3,7 +3,6 @@ import { ModelBuilder } from '../builders'
 import { Events } from '../constants'
 import { Def } from './def'
 import { forOf } from '../utils'
-import type { SchemaDefinition } from 'mongoose'
 
 export class Schema<T> {
   private defs: Map<string, Def> = new Map()
