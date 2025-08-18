@@ -2,6 +2,7 @@ import mongoose, { Document, FilterQuery, UpdateQuery } from 'mongoose'
 
 /**
  * Generic wrapper for Mongoose models with type safety.
+ *
  * @template T - The shape of the document.
  */
 export class Model<T extends {}> {
