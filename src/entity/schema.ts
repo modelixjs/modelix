@@ -1,27 +1,48 @@
-import type { Definitions } from '../types'
-import type { SchemaDefinitionType } from 'mongoose'
+import mongoose from 'mongoose'
+import { ModelBuilder } from '../builders'
+import { Events } from '../constants'
+import { Def } from './def'
+import { forOf } from '../utils'
+import type { SchemaDefinition } from 'mongoose'
 
-export class Schema {
-  private readonly definitions: Definitions = {}
+export class Schema<T> {
+  private defs: Map<string, Def> = new Map()
 
-  setDefinition(name: string, definition: SchemaDefinitionType<any>) {
-    this.definitions[name] = {
-      ...this.definitions[name],
-      ...definition,
-    }
+  constructor(protected modelBuilder: ModelBuilder<T>) {
+    this.listenEvents()
   }
 
-  getDefinitions(): Definitions {
-    return this.definitions
+  add(name: string, def: Def) {
+    this.defs.set(name, def)
+
+    return this
   }
 
-  resolveDefinitions() {
-    const definitions: Definitions = {}
+  addBatch(defs: Def[]) {
+    forOf(defs, (def: Def) => {
+      this.add(def.name, def)
+    })
 
-    for (const definition in this.definitions) {
-      definitions[definition] = this.definitions[definition]
+    return this
+  }
+
+  getDefs() {
+    return this.defs
+  }
+
+  listenEvents() {
+    this.modelBuilder.emitter.on(Events.UpdateDefs, (defs: Def[]) =>
+      this.addBatch(defs),
+    )
+  }
+
+  toSchemaDefinition(): mongoose.Schema<T> {
+    const definition: mongoose.SchemaDefinition = {}
+
+    for (const def of this.defs.values()) {
+      Object.assign(definition, def.toSchemaDef())
     }
 
-    return definitions
+    return new mongoose.Schema<T>(definition)
   }
 }
