@@ -1,8 +1,10 @@
 {
-  "name": "modelix",
+  "name": "doclojs",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "dev": "tsup src/index.ts --format esm --watch --onSuccess \"node dist/index.js\""
   },
   "keywords": [],
