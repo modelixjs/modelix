@@ -31,6 +31,7 @@ export class Schema<T extends object> {
    */
   add(name: string, def: Def): Schema<T> {
     this.defs.set(name, def)
+
     return this
   }
 
@@ -44,6 +45,7 @@ export class Schema<T extends object> {
     forOf(defs, (def: Def) => {
       this.add(def.name, def)
     })
+
     return this
   }
 
