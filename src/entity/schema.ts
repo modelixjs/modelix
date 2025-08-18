@@ -4,7 +4,7 @@ import { Events } from '../constants'
 import { Def } from './def'
 import { forOf } from '../utils'
 
-export class Schema<T> {
+export class Schema<T extends object> {
   private defs: Map<string, Def> = new Map()
 
   constructor(protected modelBuilder: ModelBuilder<T>) {
@@ -36,7 +36,7 @@ export class Schema<T> {
   }
 
   toSchemaDefinition(): mongoose.Schema<T> {
-    const definition: mongoose.SchemaDefinition = {}
+    const definition = {} as mongoose.SchemaDefinition<T>
 
     for (const def of this.defs.values()) {
       Object.assign(definition, def.toSchemaDef())

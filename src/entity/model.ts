@@ -5,7 +5,7 @@ import mongoose, { Document, FilterQuery, UpdateQuery } from 'mongoose'
  *
  * @template T - The shape of the document.
  */
-export class Model<T> {
+export class Model<T extends object> {
   /**
    * @param model - Mongoose model instance.
    */
